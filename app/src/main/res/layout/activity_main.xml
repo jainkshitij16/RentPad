@@ -9,8 +9,82 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.tryout.rentpad.MainActivity">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/Edit_Minimum_Latitude"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Enter Minimum latitude"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Maximum_Latitude"
+        android:hint="Enter Maximum latitude"
+        android:inputType="number"
+        android:layout_below="@+id/Edit_Minimum_Longitude"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Minimum_Longitude"
+        android:hint="Enter Minimum longitude"
+        android:inputType="number"
+        android:layout_below="@+id/Edit_Minimum_Latitude"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/Edit_Minimum_Latitude" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_Maximum_Longitude"
+        android:hint="Enter Maximum longitude"
+        android:inputType="number"
+        android:layout_below="@+id/Edit_Maximum_Latitude"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_bedroom"
+        android:hint="Number of Bedroom"
+        android:inputType="number"
+        android:layout_below="@+id/Edit_Maximum_Longitude"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Edit_bathroom"
+        android:hint="Number of bathroom"
+        android:inputType="number"
+        android:layout_below="@+id/Edit_Maximum_Longitude"
+        android:layout_toEndOf="@+id/Edit_bedroom" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room Rentals or House Rentals"
+        android:id="@+id/Type_Rent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textOff="Room Rentals"
+        android:textOn="House Rentals" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/button_search"
+        android:layout_below="@+id/Type_Rent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:clickable="false" />
+
 </RelativeLayout>
