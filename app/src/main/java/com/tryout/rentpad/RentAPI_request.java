@@ -1,6 +1,9 @@
 package com.tryout.rentpad;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 
@@ -13,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -74,7 +78,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         mainActivity.progressBar.setVisibility(View.GONE);
         try {
             jsonParser(response);
-        } catch (JSONException e) {
+        } catch (Exception e) {
             Log.e(e.getMessage(),"Data not parsed correctly");
         }
     }
@@ -100,8 +104,37 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         return stringBuilder.toString();
     }
 
-    public Listing jsonParser(String response) throws JSONException{
-        return null;
+    /*
+    public static Drawable LoadImageFromWebOperations(String url) {
+    try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, "src name");
+            return d;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+     */
+
+
+    public Listing jsonParser(String response) throws JSONException, MalformedURLException {
+        JSONObject jsonObject = new JSONObject(response);
+        listing.setUrl_listing(new URL(jsonObject.getString("rssurl")));
+        listing.setPrice_listing(jsonObject.getString("price"));
+        listing.setTitle_listing(jsonObject.getString("title"));
+        listing.setStreet_name_listing(jsonObject.getString("housenumstreetname"));
+        listing.setCity_listing(jsonObject.getString("city"));
+        listing.setZip_listing(jsonObject.getString("zip"));
+        //listing.setImage_listing(LoadImageFromWebOperations(jsonObject.getString("images")));
+        listing.setLongitude_listing(jsonObject.getString("x"));
+        listing.setLatitude_listing(jsonObject.getString("y"));
+        listing.setAdd_date_listing(jsonObject.getString("addate"));
+        listing.setPhone_listing(jsonObject.getString("phone"));
+        listing.setNum_bd_listing(jsonObject.getString("bedrooms"));
+        listing.setNum_ba_listing(jsonObject.getString("bathrooms"));
+        listing.setEmail_listing(jsonObject.getString("email"));
+
+        return listing;
     }
 
 
