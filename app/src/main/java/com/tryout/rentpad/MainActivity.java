@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public EditText number_bedroom;
     public Switch type_rent;
     public Button button_search;
+    public ProgressBar progressBar;
     public int xmin;
     public int xmax;
     public int ymin;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         number_bedroom = (EditText) findViewById(R.id.Edit_bedroom);
         type_rent = (Switch) findViewById(R.id.Type_Rent);
         button_search = (Button) findViewById(R.id.button_search);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
          xmin = Integer.parseInt(min_long.toString());
          xmax = Integer.parseInt(max_long.toString());
