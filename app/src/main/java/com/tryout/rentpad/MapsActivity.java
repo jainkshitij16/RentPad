@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -13,6 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Listing listing = new Listing();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +40,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        /*
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        */
+        double lat = (double) Integer.parseInt(listing.getLatitude_listing());
+        double lon = (double) Integer.parseInt(listing.getLongitude_listing());
+
+        LatLng listing_marker = new LatLng(lat,lon);
+        mMap.addMarker(new MarkerOptions().position(listing_marker).title("Marker for searched property"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(listing_marker));
+    }
+
+    // sets the listing object to be displayed on the map
+    public void setListing_display(Listing lis){
+        this.listing = lis;
     }
 }

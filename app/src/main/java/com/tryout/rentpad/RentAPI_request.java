@@ -1,5 +1,6 @@
 package com.tryout.rentpad;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.AsyncTask;
@@ -35,6 +36,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
 
     MainActivity mainActivity = new MainActivity();
     Listing listing = new Listing();
+    MapsActivity mapsActivity = new MapsActivity();
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
 
     @Override
@@ -77,7 +79,9 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         if (response == null) response = "There was an error";
         mainActivity.progressBar.setVisibility(View.GONE);
         try {
-            jsonParser(response);
+            Listing lis = jsonParser(response);
+            // Helps in setting the listing and displaying it on map
+            mapsActivity.setListing_display(lis);
         } catch (Exception e) {
             Log.e(e.getMessage(),"Data not parsed correctly");
         }
@@ -116,7 +120,8 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
      */
 
-
+    // Parses the JSON data into a listing object containing all the attributes to display.
+    // parses each attribute as a string and url as a url
     public Listing jsonParser(String response) throws JSONException, MalformedURLException {
         JSONObject jsonObject = new JSONObject(response);
         listing.setUrl_listing(new URL(jsonObject.getString("rssurl")));

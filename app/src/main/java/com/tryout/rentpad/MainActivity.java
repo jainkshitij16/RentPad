@@ -1,5 +1,6 @@
 package com.tryout.rentpad;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -54,11 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(type_rent.isChecked()) type = 2;
 
+        // Making an intent to call maps after click of search
+        final Intent intent = new Intent(this,MapsActivity.class);
+
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rentAPI_request.execute();
-
+                startActivity(intent);
+                ;
             }
         });
 
