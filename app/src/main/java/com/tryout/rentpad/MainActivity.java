@@ -1,7 +1,7 @@
 package com.tryout.rentpad;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +17,15 @@ public class MainActivity extends AppCompatActivity {
     public EditText number_bedroom;
     public Switch type_rent;
     public Button button_search;
+    public int xmin;
+    public int xmax;
+    public int ymin;
+    public int ymax;
+    public int n_ba;
+    public int n_bd;
+    public int type;
+
+    RentAPI_request rentAPI_request = new RentAPI_request();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +41,20 @@ public class MainActivity extends AppCompatActivity {
         type_rent = (Switch) findViewById(R.id.Type_Rent);
         button_search = (Button) findViewById(R.id.button_search);
 
+         xmin = Integer.parseInt(min_long.toString());
+         xmax = Integer.parseInt(max_long.toString());
+         ymin = Integer.parseInt(min_lat.toString());
+         ymax = Integer.parseInt(max_lat.toString());
+         n_ba = Integer.parseInt(number_bathroom.toString());
+         n_bd = Integer.parseInt(number_bedroom.toString());
+         type = 1;
+
+        if(type_rent.isChecked()) type = 2;
+
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                rentAPI_request.execute();
             }
         });
 
