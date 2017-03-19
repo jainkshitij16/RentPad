@@ -2,6 +2,10 @@ package com.tryout.rentpad;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -14,7 +18,7 @@ import java.net.URL;
 /**
  * Created by Kshitij on 2017-03-18.
  */
-public class RentAPI_request extends AsyncTask<Void,Void,Void> {
+public class RentAPI_request extends AsyncTask<Void,Void,String> {
 
     private static String API_URL = "http://www.rentrent.org/RENT/Ads.aspx?";
     private static String X_MIN = "xmin=";
@@ -26,10 +30,11 @@ public class RentAPI_request extends AsyncTask<Void,Void,Void> {
     private static String TYPE = "&type=";
 
     MainActivity mainActivity = new MainActivity();
+    Listing listing = new Listing();
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
 
     @Override
-    protected Void doInBackground(Void... urls) {
+    protected String doInBackground(Void... urls) {
         try {
             URL url  = new URL(
             API_URL+X_MIN+mainActivity.xmin+Y_MIN+mainActivity.ymin+ X_MAX+mainActivity.xmax+Y_MAX+mainActivity.ymax
@@ -51,7 +56,40 @@ public class RentAPI_request extends AsyncTask<Void,Void,Void> {
         return null;
     }
 
-    public String readStream (InputStream inputStream) throws IOException{
+
+    protected void onPreExecute() {
+        mainActivity.max_lat.setText("");
+        mainActivity.min_lat.setText("");
+        mainActivity.max_long.setText("");
+        mainActivity.min_long.setText("");
+        mainActivity.number_bathroom.setText("");
+        mainActivity.number_bedroom.setText("");
+        mainActivity.type_rent.setChecked(false);
+        mainActivity.progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    protected void onPostExecute(String response) {
+        if (response == null) response = "There was an error";
+        mainActivity.progressBar.setVisibility(View.GONE);
+        try {
+            jsonParser(response);
+        } catch (JSONException e) {
+            Log.e(e.getMessage(),"Data not parsed correctly");
+        }
+    }
+
+    @Override
+    protected void onProgressUpdate(Void... values) {
+        mainActivity.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onCancelled() {
+        onPreExecute();
+    }
+
+    public String readStream(InputStream inputStream) throws IOException{
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream));
         String line = buffer.readLine();
@@ -61,5 +99,11 @@ public class RentAPI_request extends AsyncTask<Void,Void,Void> {
         inputStream.close();
         return stringBuilder.toString();
     }
+
+    public Listing jsonParser(String response) throws JSONException{
+        return null;
+    }
+
+
 
 }
