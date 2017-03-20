@@ -20,20 +20,25 @@ public class MainActivity extends AppCompatActivity {
     public Switch type_rent;
     public Button button_search;
     public ProgressBar progressBar;
-    public int xmin;
-    public int xmax;
-    public int ymin;
-    public int ymax;
+    public double xmin;
+    public double xmax;
+    public double ymin;
+    public double ymax;
     public int n_ba;
     public int n_bd;
     public int type;
 
-    RentAPI_request rentAPI_request = new RentAPI_request();
+    private static double MIN_LONG = 49.2765;
+    private static double MIN_LAT = -123.2177;
+    private static int BATH_BED = 1;
 
+    RentAPI_request rentAPI_request;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rentAPI_request = new RentAPI_request();
 
         max_lat = (EditText) findViewById(R.id.Edit_Maximum_Latitude);
         min_lat = (EditText) findViewById(R.id.Edit_Maximum_Latitude);
@@ -45,15 +50,27 @@ public class MainActivity extends AppCompatActivity {
         button_search = (Button) findViewById(R.id.button_search);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-         xmin = Integer.parseInt(min_long.toString());
-         xmax = Integer.parseInt(max_long.toString());
-         ymin = Integer.parseInt(min_lat.toString());
-         ymax = Integer.parseInt(max_lat.toString());
-         n_ba = Integer.parseInt(number_bathroom.toString());
-         n_bd = Integer.parseInt(number_bedroom.toString());
-         type = 1;
+        // if statements to make up something
+        if(min_long.toString() !=null) xmin = (double) Integer.parseInt(min_long.toString());
+        else xmin = MIN_LONG;
+
+        if(min_lat.toString() !=null) ymin = (double) Integer.parseInt(min_lat.toString());
+        else ymin = MIN_LAT;
+
+        if(max_long.toString() !=null) xmax = (double) Integer.parseInt(max_long.toString());
+        else xmax = MIN_LONG+5.00;
+
+        if(max_lat.toString() !=null) ymax = (double) Integer.parseInt(max_lat.toString());
+        else ymax = MIN_LAT+5.00;
+
+        if(number_bathroom.toString() !=null) n_ba = Integer.parseInt(number_bathroom.toString());
+        else n_ba = BATH_BED;
+
+        if(number_bedroom.toString() !=null) n_bd = Integer.parseInt(number_bedroom.toString());
+        else n_bd = BATH_BED;
 
         if(type_rent.isChecked()) type = 2;
+        else type = 1;
 
         // Making an intent to call maps after click of search
         final Intent intent = new Intent(this,MapsActivity.class);
