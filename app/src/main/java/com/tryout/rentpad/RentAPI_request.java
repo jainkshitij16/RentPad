@@ -1,10 +1,6 @@
 package com.tryout.rentpad;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 
@@ -25,6 +21,7 @@ import java.net.URL;
  */
 public class RentAPI_request extends AsyncTask<Void,Void,String> {
 
+    // Constants
     private static String API_URL = "http://www.rentrent.org/RENT/Ads.aspx?";
     private static String X_MIN = "xmin=";
     private static String Y_MIN = "&ymin=";
@@ -33,10 +30,24 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     private static String BD = "&bd=";
     private static String BA = "&ba=";
     private static String TYPE = "&type=";
+    private static double MIN_LONG = 49.2765;
+    private static double MIN_LAT = -123.2177;
+    private static int BATH_BED = 1;
 
+    // Variables
+    public double xmin;
+    public double xmax;
+    public double ymin;
+    public double ymax;
+    public int n_ba;
+    public int n_bd;
+    public int type;
+
+    // Classes to be initialized
     MainActivity mainActivity;
     Listing listing;
     MapsActivity mapsActivity;
+
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
 
     @Override
@@ -44,10 +55,11 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         mainActivity = new MainActivity();
         listing = new Listing();
         mapsActivity = new MapsActivity();
+        setValues_URL();
+
         try {
             URL url  = new URL(
-            API_URL+X_MIN+mainActivity.xmin+Y_MIN+mainActivity.ymin+ X_MAX+mainActivity.xmax+Y_MAX+mainActivity.ymax
-            +BD+mainActivity.n_bd+BA+mainActivity.n_ba+TYPE+mainActivity.type);
+            API_URL+X_MIN+xmin+Y_MIN+ymin+ X_MAX+xmax+Y_MAX+ymax+BD+n_bd+BA+n_ba+TYPE+type);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
@@ -123,8 +135,10 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
      */
 
-    // Parses the JSON data into a listing object containing all the attributes to display.
-    // parses each attribute as a string and url as a url
+    /*
+     Parses the JSON data into a listing object containing all the attributes to display.
+     parses each attribute as a string and url as a url
+     */
     public Listing jsonParser(String response) throws JSONException, MalformedURLException {
         JSONObject jsonObject = new JSONObject(response);
         listing.setUrl_listing(new URL(jsonObject.getString("rssurl")));
@@ -145,6 +159,33 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         return listing;
     }
 
+    /*
+     Uses the mainactivity edit_text fields to assign data to form a request
+     */
+    public void setValues_URL (){
+        // if statements to make up something
+        if(mainActivity.min_long.toString() !=null) xmin = (double) Integer.parseInt(mainActivity.min_long.toString());
+        else xmin = MIN_LONG;
 
+        if(mainActivity.min_lat.toString() !=null) ymin = (double) Integer.parseInt(mainActivity.min_lat.toString());
+        else ymin = MIN_LAT;
+
+        if(mainActivity.max_long.toString() !=null) xmax = (double) Integer.parseInt(mainActivity.max_long.toString());
+        else xmax = MIN_LONG+5.00;
+
+        if(mainActivity.max_lat.toString() !=null) ymax = (double) Integer.parseInt(mainActivity.max_lat.toString());
+        else ymax = MIN_LAT+5.00;
+
+        if(mainActivity.number_bathroom.toString() !=null) n_ba = Integer.parseInt(mainActivity.number_bathroom.toString());
+        else n_ba = BATH_BED;
+
+        if(mainActivity.number_bedroom.toString() !=null) n_bd = Integer.parseInt(mainActivity.number_bedroom.toString());
+        else n_bd = BATH_BED;
+
+        if(mainActivity.type_rent.isChecked()) type = 2;
+        else type = 1;
+
+
+    }
 
 }

@@ -1,12 +1,6 @@
 package com.tryout.rentpad;
 
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.provider.ContactsContract;
-
-import java.io.InputStream;
 import java.net.URL;
-import java.util.Date;
 
 /**
  * Created by Kshitij on 2017-03-19.
