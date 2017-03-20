@@ -34,13 +34,16 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     private static String BA = "&ba=";
     private static String TYPE = "&type=";
 
-    MainActivity mainActivity = new MainActivity();
-    Listing listing = new Listing();
-    MapsActivity mapsActivity = new MapsActivity();
+    MainActivity mainActivity;
+    Listing listing;
+    MapsActivity mapsActivity;
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
 
     @Override
     protected String doInBackground(Void... urls) {
+        mainActivity = new MainActivity();
+        listing = new Listing();
+        mapsActivity = new MapsActivity();
         try {
             URL url  = new URL(
             API_URL+X_MIN+mainActivity.xmin+Y_MIN+mainActivity.ymin+ X_MAX+mainActivity.xmax+Y_MAX+mainActivity.ymax

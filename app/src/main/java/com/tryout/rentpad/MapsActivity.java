@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Listing listing = new Listing();
+    private Listing listing;
 
 
     @Override
@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        listing = new Listing();
         /*
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
@@ -58,4 +59,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void setListing_display(Listing lis){
         this.listing = lis;
     }
+
 }

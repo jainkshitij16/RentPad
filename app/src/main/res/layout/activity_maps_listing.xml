@@ -8,3 +8,4 @@
     android:layout_height="match_parent"
     tools:context="com.tryout.rentpad.MapsActivity"
     tools:layout="@layout/activity_maps_listing" />
+
