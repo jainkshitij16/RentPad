@@ -77,7 +77,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         return null;
     }
 
-
+    /*
     protected void onPreExecute() {
         mainActivity.max_lat.setText("");
         mainActivity.min_lat.setText("");
@@ -88,6 +88,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         mainActivity.type_rent.setChecked(false);
         mainActivity.progressBar.setVisibility(View.INVISIBLE);
     }
+     */
 
     @Override
     protected void onPostExecute(String response) {
