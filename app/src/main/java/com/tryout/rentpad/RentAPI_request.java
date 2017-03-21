@@ -49,14 +49,15 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     MapsActivity mapsActivity;
 
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
-
-    @Override
-    protected String doInBackground(Void... urls) {
+    
+    public RentAPI_request(){
         mainActivity = new MainActivity();
         listing = new Listing();
         mapsActivity = new MapsActivity();
-        setValues_URL();
+    }
 
+    @Override
+    protected String doInBackground(Void... urls) {
         try {
             URL url  = new URL(
             API_URL+X_MIN+xmin+Y_MIN+ymin+ X_MAX+xmax+Y_MAX+ymax+BD+n_bd+BA+n_ba+TYPE+type);
@@ -77,18 +78,11 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         return null;
     }
 
-    /*
+
     protected void onPreExecute() {
-        mainActivity.max_lat.setText("");
-        mainActivity.min_lat.setText("");
-        mainActivity.max_long.setText("");
-        mainActivity.min_long.setText("");
-        mainActivity.number_bathroom.setText("");
-        mainActivity.number_bedroom.setText("");
-        mainActivity.type_rent.setChecked(false);
-        mainActivity.progressBar.setVisibility(View.INVISIBLE);
+        setValues_URL();
     }
-     */
+
 
     @Override
     protected void onPostExecute(String response) {
