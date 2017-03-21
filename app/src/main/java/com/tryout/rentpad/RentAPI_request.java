@@ -49,7 +49,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     MapsActivity mapsActivity;
 
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
-    
+
     public RentAPI_request(){
         mainActivity = new MainActivity();
         listing = new Listing();
