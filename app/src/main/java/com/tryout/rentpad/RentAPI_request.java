@@ -155,7 +155,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
 
     /*
-     Uses the mainactivity edit_text fields to assign data to form a request
+     Uses the MainActivity edit_text fields to assign data to form a request
      */
     public void setValues_URL (){
         // if statements to make up something
