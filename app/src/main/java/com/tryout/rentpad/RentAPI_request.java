@@ -119,6 +119,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
 
     /*
+    function to load image from the resultant request to server
     public static Drawable LoadImageFromWebOperations(String url) {
     try {
             InputStream is = (InputStream) new URL(url).getContent();
