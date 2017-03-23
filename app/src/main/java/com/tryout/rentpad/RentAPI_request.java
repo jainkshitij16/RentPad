@@ -119,7 +119,10 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
 
     /*
+<<<<<<< HEAD
     function to load image from the resultant request to server
+=======
+>>>>>>> refs/remotes/origin/master
     public static Drawable LoadImageFromWebOperations(String url) {
     try {
             InputStream is = (InputStream) new URL(url).getContent();
@@ -156,7 +159,11 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
 
     /*
+<<<<<<< HEAD
      Uses the MainActivity edit_text fields to assign data to form a request
+=======
+     Uses the mainactivity edit_text fields to assign data to form a request
+>>>>>>> refs/remotes/origin/master
      */
     public void setValues_URL (){
         // if statements to make up something
