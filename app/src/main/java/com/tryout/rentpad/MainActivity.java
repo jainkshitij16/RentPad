@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rentAPI_request = new RentAPI_request();
-
         max_lat = (EditText) findViewById(R.id.Edit_Maximum_Latitude);
         min_lat = (EditText) findViewById(R.id.Edit_Maximum_Latitude);
         max_long = (EditText) findViewById(R.id.Edit_Maximum_Longitude);
@@ -39,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         button_search = (Button) findViewById(R.id.button_search);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        rentAPI_request = new RentAPI_request(MainActivity.this);
+        rentAPI_request.setValues_URL(min_long,max_long,min_lat,max_lat,number_bathroom,number_bedroom,type_rent);
 
         // Making an intent to call maps after click of search
         final Intent intent = new Intent(this,MapsActivity.class);

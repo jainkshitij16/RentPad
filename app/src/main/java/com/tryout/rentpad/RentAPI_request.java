@@ -3,6 +3,8 @@ package com.tryout.rentpad;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,11 +52,12 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
 
     // http://www.rentrent.org/RENT/Ads.aspx?xmin=&ymin=&xmax=&ymax=&bd=&ba=&type=
 
-    public RentAPI_request(){
-        mainActivity = new MainActivity();
+    public RentAPI_request(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
         listing = new Listing();
         mapsActivity = new MapsActivity();
     }
+
 
     @Override
     protected String doInBackground(Void... urls) {
@@ -77,12 +80,6 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
         }
         return null;
     }
-
-
-    protected void onPreExecute() {
-        setValues_URL();
-    }
-
 
     @Override
     protected void onPostExecute(String response) {
@@ -159,36 +156,22 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     }
 
     /*
-<<<<<<< HEAD
      Uses the MainActivity edit_text fields to assign data to form a request
-=======
-     Uses the mainactivity edit_text fields to assign data to form a request
->>>>>>> refs/remotes/origin/master
      */
-    public void setValues_URL (){
-        // if statements to make up something
-        if(mainActivity.min_long.toString() !=null) xmin = (double) Integer.parseInt(mainActivity.min_long.toString());
-        else xmin = MIN_LONG;
+    public void setValues_URL (EditText editText, EditText editText1, EditText editText2,
+                               EditText editText3, EditText editText4, EditText editText5, Switch type){
 
-        if(mainActivity.min_lat.toString() !=null) ymin = (double) Integer.parseInt(mainActivity.min_lat.toString());
-        else ymin = MIN_LAT;
+        xmin = (double) Integer.parseInt(editText.getText().toString());
+        xmax = (double) Integer.parseInt(editText1.getText().toString());
+        ymin = (double) Integer.parseInt(editText2.getText().toString());
+        ymax = (double) Integer.parseInt(editText3.getText().toString());
+        n_ba = Integer.parseInt(editText4.getText().toString());
+        n_bd = Integer.parseInt(editText5.getText().toString());
 
-        if(mainActivity.max_long.toString() !=null) xmax = (double) Integer.parseInt(mainActivity.max_long.toString());
-        else xmax = MIN_LONG+5.00;
-
-        if(mainActivity.max_lat.toString() !=null) ymax = (double) Integer.parseInt(mainActivity.max_lat.toString());
-        else ymax = MIN_LAT+5.00;
-
-        if(mainActivity.number_bathroom.toString() !=null) n_ba = Integer.parseInt(mainActivity.number_bathroom.toString());
-        else n_ba = BATH_BED;
-
-        if(mainActivity.number_bedroom.toString() !=null) n_bd = Integer.parseInt(mainActivity.number_bedroom.toString());
-        else n_bd = BATH_BED;
-
-        if(mainActivity.type_rent.isChecked()) type = 2;
-        else type = 1;
-
-
+        if(type.isChecked()) this.type = 2;
+        else this.type = 1;
     }
+
+
 
 }
