@@ -22,14 +22,14 @@ public class Listing {
     private String num_ba_listing;
     private String email_listing;
 
+    private static Listing listing = new Listing();
 
-    public Listing(){
+
+    public static Listing getInstance(){
+        return listing;
     }
 
-    public Listing(String title_listing, String street_name_listing, String phone_listing) {
-        this.title_listing = title_listing;
-        this.street_name_listing = street_name_listing;
-        this.phone_listing = phone_listing;
+    private Listing() {
     }
 
 

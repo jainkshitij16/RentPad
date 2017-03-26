@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 rentAPI_request.execute();
                 startActivity(intent);
-                ;
             }
         });
 

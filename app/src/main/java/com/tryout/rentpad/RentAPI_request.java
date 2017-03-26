@@ -54,7 +54,7 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
 
     public RentAPI_request(MainActivity mainActivity){
         this.mainActivity = mainActivity;
-        listing = new Listing();
+        listing = Listing.getInstance();
         mapsActivity = new MapsActivity();
     }
 
@@ -161,12 +161,29 @@ public class RentAPI_request extends AsyncTask<Void,Void,String> {
     public void setValues_URL (EditText editText, EditText editText1, EditText editText2,
                                EditText editText3, EditText editText4, EditText editText5, Switch type){
 
+        if (editText.getText().toString() !=null)
         xmin = (double) Integer.parseInt(editText.getText().toString());
+        else xmin = MIN_LONG;
+
+        if(editText1.getText().toString() != null)
         xmax = (double) Integer.parseInt(editText1.getText().toString());
+        else xmax = MIN_LONG + 10.00;
+
+        if(editText2.getText().toString() != null)
         ymin = (double) Integer.parseInt(editText2.getText().toString());
+        else ymin = MIN_LAT;
+
+        if(editText3.getText().toString() != null)
         ymax = (double) Integer.parseInt(editText3.getText().toString());
+        else ymax = MIN_LAT + 10.00;
+
+        if(editText4.getText().toString() !=null)
         n_ba = Integer.parseInt(editText4.getText().toString());
+        else n_ba = BATH_BED;
+
+        if(editText5.getText().toString() !=null)
         n_bd = Integer.parseInt(editText5.getText().toString());
+        else n_bd = BATH_BED;
 
         if(type.isChecked()) this.type = 2;
         else this.type = 1;
